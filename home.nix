@@ -43,6 +43,7 @@
 
 
     pkgs._1password-gui
+    pkgs.alloy6
     pkgs.autoconf
     pkgs.automake
     pkgs.beekeeper-studio
@@ -78,6 +79,7 @@
     pkgs.ripgrep
     pkgs.starship
     pkgs.texlab
+    pkgs.tlaplusToolbox
     pkgs.tree-sitter
     pkgs.tmux
     pkgs.vscode
