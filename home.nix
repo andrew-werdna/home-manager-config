@@ -5,6 +5,8 @@
   # manage.
   home.username = "sirius";
   home.homeDirectory = "/home/sirius";
+  targets.genericLinux.enable = true;
+  nixpkgs.config.allowUnfree = true;
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -22,19 +24,19 @@
     # # "Hello, world!" when run.
     # pkgs.hello
 
-    pkgs.nerdfonts
-    pkgs.nil
-    pkgs.helix
-    pkgs.nushell
+
+    pkgs._1password-gui
+    #pkgs.clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
     pkgs.coreutils-full
     pkgs.gcc_latest
-    #pkgs.clang_16
-    #pkgs.clang-tools_16
-    #pkgs.llvm_16
-    #pkgs.obsidian # need to figure out how to set allowUnfree for HM
+    pkgs.helix
+    pkgs.llvm_16
+    pkgs.nerdfonts
+    pkgs.nil
+    pkgs.nushell
+    pkgs.obsidian
     pkgs.ranger
     pkgs.starship
-    #pkgs._1password-gui # need to figure out how to set allowUnfree for HM
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -81,10 +83,11 @@
 
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
+  programs.direnv.enable = true;
 
   programs.git = {
     enable = true;
-    userName = "Andrew Brown";
+    userName = "andrew-werdna";
     userEmail = "8261769+andrew-werdna@users.noreply.github.com";
   };
 }
