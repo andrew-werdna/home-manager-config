@@ -43,16 +43,39 @@
 
 
     pkgs._1password-gui
+    pkgs.autoconf
+    pkgs.automake
+    pkgs.beekeeper-studio
+    #pkgs.binutils # ld has a name collision with ld from gcc
+    pkgs.bison
+    pkgs.brave
     #pkgs.clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
+    pkgs.copyq
     pkgs.coreutils-full
+    pkgs.docker
+    pkgs.docker-compose
     pkgs.gcc_latest
+    pkgs.gnupg
+    pkgs.gzip
     pkgs.helix
+    pkgs.jq
+    pkgs.kind
+    pkgs.kubectl
     pkgs.llvm_16
+    pkgs.minikube
     pkgs.nerdfonts
+    pkgs.netcat
     pkgs.nil
     pkgs.obsidian
+    pkgs.openssh
+    pkgs.pass
+    pkgs.pkg-config
+    pkgs.pprof
     pkgs.ranger
     pkgs.starship
+    pkgs.tree-sitter
+    pkgs.tmux
+    pkgs.vscode
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
