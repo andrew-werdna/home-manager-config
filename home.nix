@@ -52,6 +52,7 @@
     #pkgs.clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
     pkgs.copyq
     pkgs.coreutils-full
+    pkgs.cmake
     pkgs.docker
     pkgs.docker-compose
     pkgs.gcc_latest
@@ -59,6 +60,7 @@
     pkgs.gzip
     pkgs.helix
     pkgs.jq
+    pkgs.keychain
     pkgs.kind
     pkgs.kubectl
     pkgs.llvm_16
@@ -72,10 +74,15 @@
     pkgs.pkg-config
     pkgs.pprof
     pkgs.ranger
+    pkgs.ripgrep
     pkgs.starship
+    pkgs.texlab
     pkgs.tree-sitter
     pkgs.tmux
     pkgs.vscode
+    pkgs.zellij
+    pkgs.zig
+    pkgs.zls
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
