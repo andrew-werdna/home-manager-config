@@ -65,6 +65,7 @@
     pkgs.kubectl
     pkgs.llvm_16
     pkgs.minikube
+    pkgs.neofetch
     pkgs.nerdfonts
     pkgs.netcat
     pkgs.nil
