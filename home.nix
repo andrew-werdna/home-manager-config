@@ -33,7 +33,6 @@
     pkgs.llvm_16
     pkgs.nerdfonts
     pkgs.nil
-    pkgs.nushell
     pkgs.obsidian
     pkgs.ranger
     pkgs.starship
@@ -84,6 +83,9 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
   programs.direnv.enable = true;
+  programs.bash.enable = true;
+  programs.zsh.enable = true;
+  programs.nushell.enable = true;
 
   programs.git = {
     enable = true;
