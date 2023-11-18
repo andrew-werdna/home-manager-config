@@ -10,6 +10,7 @@ _per project_ tools and dependencies.
 
 - set my default shell (between `nushell` and `zsh`)
 - have updated shell configuration managed and symlinked by HM (HM already manages configs, I just need to customize them)
+  - also automatically set up zsh and nushell with starship
 - finish customizing my `git config` and `git-related` files
 - now that I've solved the `*.desktop` files being findable by the GNOME application explorer, I just need to customize
 the application icons for the various applications I've installed
