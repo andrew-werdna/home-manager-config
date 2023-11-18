@@ -5,8 +5,25 @@
   # manage.
   home.username = "sirius";
   home.homeDirectory = "/home/sirius";
+
   targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
+  xdg.enable = true;
+  xdg.mime.enable = true;
+
+  # I found this solution on the lengthy thread about HM installed applications not being findable in GNOME application search
+  # The link to the exact comment is [here](https://github.com/nix-community/home-manager/issues/1439#issuecomment-1106208294).
+  home.activation = {
+    linkDesktopApplications = {
+      after = [ "writeBoundary" "createXdgUserDirectories" ];
+      before = [ ];
+      data = ''
+        rm -rf ${config.xdg.dataHome}/"applications/home-manager"
+        mkdir -p ${config.xdg.dataHome}/"applications/home-manager"
+        cp -Lr ${config.home.homeDirectory}/.nix-profile/share/applications/* ${config.xdg.dataHome}/"applications/home-manager/"
+      '';
+    };
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -92,4 +109,5 @@
     userName = "andrew-werdna";
     userEmail = "8261769+andrew-werdna@users.noreply.github.com";
   };
+
 }
