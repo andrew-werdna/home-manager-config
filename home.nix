@@ -138,10 +138,9 @@
   #
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
-    # EDITOR = "emacs";
+    EDITOR = "hx";
   };
 
-  programs.bash.enable = true;
   programs.direnv = {
     enable = true;
     nix-direnv.enable = true;
@@ -156,5 +155,4 @@
   programs.home-manager.enable = true;
   programs.nushell.enable = true;
   programs.starship.enable = true;
-  programs.zsh.enable = true;
 }
