@@ -94,6 +94,7 @@
     pkgs.vscode
     pkgs.watch
     pkgs.xplr
+    pkgs.zeal
     pkgs.zellij
     pkgs.zig
     pkgs.zls
