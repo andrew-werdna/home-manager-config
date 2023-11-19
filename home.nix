@@ -50,7 +50,7 @@
     #pkgs.binutils # ld has a name collision with ld from gcc
     pkgs.bison
     pkgs.brave
-    pkgs.chez-racket
+    pkgs.chez
     #pkgs.clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
     pkgs.cmake
     pkgs.copyq
@@ -83,6 +83,7 @@
     pkgs.pass
     pkgs.pkg-config
     pkgs.pprof
+    pkgs.racket
     pkgs.ranger
     pkgs.ripgrep
     pkgs.texlab
