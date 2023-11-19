@@ -6,8 +6,11 @@
   home.username = "sirius";
   home.homeDirectory = "/home/sirius";
 
-  targets.genericLinux.enable = true;
   nixpkgs.config.allowUnfree = true;
+  # something to [consider](https://rycee.gitlab.io/home-manager/options.html#opt-qt.enable)
+  qt.enable = true;
+  #qt.platformTheme = "";
+  targets.genericLinux.enable = true;
   xdg.enable = true;
   xdg.mime.enable = true;
 
@@ -72,6 +75,7 @@
     pkgs.keychain
     pkgs.kind
     pkgs.kubectl
+    pkgs.libcanberra-gtk3 # not sure if I really need this since I discovered the QT section
     pkgs.lldb_16
     pkgs.llvm_16
     pkgs.minikube
@@ -146,6 +150,7 @@
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     EDITOR = "hx";
+    SHELL = "/home/sirius/.nix-profile/bin/zsh";
   };
 
   programs.direnv = {
@@ -160,6 +165,20 @@
   };
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
-  programs.nushell.enable = true;
+  #programs.nushell.enable = true; # I want to learn this but not this moment
   programs.starship.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableAutosuggestions = true;
+    autocd = true;
+    defaultKeymap = "viins";
+    oh-my-zsh = {
+      enable = true;
+      plugins = [ "git" "kubectl" "starship" "vi-mode" ];
+      theme = "agnoster";
+    };
+    syntaxHighlighting = {
+      enable = true;
+    };
+  };
 }
