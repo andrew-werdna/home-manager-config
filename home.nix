@@ -42,6 +42,7 @@
     # pkgs.hello
 
     pkgs._1password-gui
+    pkgs.albert
     pkgs.alloy6
     pkgs.autoconf
     pkgs.automake
@@ -88,6 +89,7 @@
     pkgs.racket
     pkgs.ranger
     pkgs.ripgrep
+    pkgs.strace
     pkgs.texlab
     pkgs.tlaplusToolbox
     pkgs.tree
@@ -96,8 +98,9 @@
     pkgs.valgrind
     pkgs.vscode
     pkgs.watch
+    pkgs.wireshark
     pkgs.xplr
-    pkgs.zeal
+    pkgs.zeal # for some reason this is having a problem related to QT or GTK, so it won't run currently
     pkgs.zellij
     pkgs.zig
     pkgs.zls
