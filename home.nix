@@ -61,6 +61,7 @@
     pkgs.fd
     pkgs.flawfinder
     pkgs.gcc_latest
+    pkgs.gdb
     pkgs.gnupg
     pkgs.graphviz
     pkgs.gzip
@@ -70,6 +71,7 @@
     pkgs.keychain
     pkgs.kind
     pkgs.kubectl
+    pkgs.lldb_16
     pkgs.llvm_16
     pkgs.minikube
     pkgs.navi
@@ -91,6 +93,7 @@
     pkgs.tree
     pkgs.tree-sitter
     pkgs.tmux
+    pkgs.valgrind
     pkgs.vscode
     pkgs.watch
     pkgs.xplr
