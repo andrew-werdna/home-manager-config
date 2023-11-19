@@ -41,35 +41,43 @@
     # # "Hello, world!" when run.
     # pkgs.hello
 
-
     pkgs._1password-gui
     pkgs.alloy6
     pkgs.autoconf
     pkgs.automake
+    pkgs.bat
     pkgs.beekeeper-studio
     #pkgs.binutils # ld has a name collision with ld from gcc
     pkgs.bison
     pkgs.brave
+    pkgs.chez-racket
     #pkgs.clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
+    pkgs.cmake
     pkgs.copyq
     pkgs.coreutils-full
-    pkgs.cmake
+    pkgs.cppcheck
     pkgs.docker
     pkgs.docker-compose
+    pkgs.fd
+    pkgs.flawfinder
     pkgs.gcc_latest
     pkgs.gnupg
+    pkgs.graphviz
     pkgs.gzip
     pkgs.helix
+    pkgs.htop
     pkgs.jq
     pkgs.keychain
     pkgs.kind
     pkgs.kubectl
     pkgs.llvm_16
     pkgs.minikube
+    pkgs.navi
     pkgs.neofetch
     pkgs.nerdfonts
     pkgs.netcat
     pkgs.nil
+    pkgs.nixfmt
     pkgs.obsidian
     pkgs.openssh
     pkgs.pass
@@ -77,12 +85,14 @@
     pkgs.pprof
     pkgs.ranger
     pkgs.ripgrep
-    pkgs.starship
     pkgs.texlab
     pkgs.tlaplusToolbox
+    pkgs.tree
     pkgs.tree-sitter
     pkgs.tmux
     pkgs.vscode
+    pkgs.watch
+    pkgs.xplr
     pkgs.zellij
     pkgs.zig
     pkgs.zls
@@ -130,17 +140,20 @@
     # EDITOR = "emacs";
   };
 
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-  programs.direnv.enable = true;
   programs.bash.enable = true;
-  programs.zsh.enable = true;
-  programs.nushell.enable = true;
-
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
+  programs.eza.enable = true;
   programs.git = {
     enable = true;
     userName = "andrew-werdna";
     userEmail = "8261769+andrew-werdna@users.noreply.github.com";
   };
-
+  # Let Home Manager install and manage itself.
+  programs.home-manager.enable = true;
+  programs.nushell.enable = true;
+  programs.starship.enable = true;
+  programs.zsh.enable = true;
 }
