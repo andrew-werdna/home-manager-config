@@ -16,17 +16,20 @@
 
   # I found this solution on the lengthy thread about HM installed applications not being findable in GNOME application search
   # The link to the exact comment is [here](https://github.com/nix-community/home-manager/issues/1439#issuecomment-1106208294).
-  home.activation = {
-    linkDesktopApplications = {
-      after = [ "writeBoundary" "createXdgUserDirectories" ];
-      before = [ ];
-      data = ''
-        rm -rf ${config.xdg.dataHome}/"applications/home-manager"
-        mkdir -p ${config.xdg.dataHome}/"applications/home-manager"
-        cp -Lr ${config.home.homeDirectory}/.nix-profile/share/applications/* ${config.xdg.dataHome}/"applications/home-manager/"
-      '';
-    };
-  };
+  # since I enabled xdg stuff above, I'm not certain that this below section is really necessary anymore as I've noticed
+  # when using the application finder, that there are now two copies of each installed application.
+
+  #home.activation = {
+    #linkDesktopApplications = {
+      #after = [ "writeBoundary" "createXdgUserDirectories" ];
+      #before = [ ];
+      #data = ''
+        #rm -rf ${config.xdg.dataHome}/"applications/home-manager"
+        #mkdir -p ${config.xdg.dataHome}/"applications/home-manager"
+        #cp -Lr ${config.home.homeDirectory}/.nix-profile/share/applications/* ${config.xdg.dataHome}/"applications/home-manager/"
+      #'';
+    #};
+  #};
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -60,6 +63,7 @@
     pkgs.copyq
     pkgs.coreutils-full
     pkgs.cppcheck
+    pkgs.discord
     pkgs.docker
     pkgs.docker-compose
     pkgs.fd
