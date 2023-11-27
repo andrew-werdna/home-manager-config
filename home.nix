@@ -7,17 +7,26 @@
   home.homeDirectory = "/home/sirius";
 
   nixpkgs.config.allowUnfree = true;
+
   # something to [consider](https://rycee.gitlab.io/home-manager/options.html#opt-qt.enable)
   qt.enable = true;
-  #qt.platformTheme = "";
+  qt.platformTheme = "gtk";
+  qt.style.name = "adwaita";
+
   targets.genericLinux.enable = true;
+
   xdg.enable = true;
   xdg.mime.enable = true;
+  xdg.mimeApps.enable = true;
+  xdg.userDirs.enable = true;
 
   # I found this solution on the lengthy thread about HM installed applications not being findable in GNOME application search
   # The link to the exact comment is [here](https://github.com/nix-community/home-manager/issues/1439#issuecomment-1106208294).
-  # since I enabled xdg stuff above, I'm not certain that this below section is really necessary anymore as I've noticed
+  # Since I enabled xdg stuff above, I'm not certain that this below section is really necessary anymore as I've noticed
   # when using the application finder, that there are now two copies of each installed application.
+  # I have discovered that the xdg enable stuff above _will_ in fact update `*.desktop` entries, but GNOME won't pick up the
+  # changes due to them being symbolic links. Currently, one has to log out and then log back in for the changes to be detected.
+  # I'm still searching for a solution so logging in/out afterwards is no longer necessary.
 
   #home.activation = {
     #linkDesktopApplications = {
@@ -53,11 +62,12 @@
     pkgs.autoconf
     pkgs.automake
     pkgs.bat
+    pkgs.bazel
     pkgs.beekeeper-studio
     #pkgs.binutils # ld has a name collision with ld from gcc
     pkgs.bison
     pkgs.brave
-    pkgs.chez
+    #pkgs.chez # don't really need this right now
     #pkgs.clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
     pkgs.cmake
     pkgs.copyq
@@ -79,7 +89,6 @@
     pkgs.keychain
     pkgs.kind
     pkgs.kubectl
-    pkgs.libcanberra-gtk3 # not sure if I really need this since I discovered the QT section
     pkgs.lldb_16
     pkgs.llvm_16
     pkgs.minikube
@@ -94,7 +103,7 @@
     pkgs.pass
     pkgs.pkg-config
     pkgs.pprof
-    pkgs.racket
+    #pkgs.racket # don't really need this right now
     pkgs.ranger
     pkgs.ripgrep
     pkgs.strace
