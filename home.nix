@@ -56,17 +56,20 @@
   # changes due to them being symbolic links. Currently, one has to log out and then log back in for the changes to be detected.
   # I'm still searching for a solution so logging in/out afterwards is no longer necessary.
 
-  #home.activation = {
-    #linkDesktopApplications = {
-      #after = [ "writeBoundary" "createXdgUserDirectories" ];
-      #before = [ ];
-      #data = ''
+  home.activation = {
+    linkDesktopApplications = {
+      after = [ "writeBoundary" "createXdgUserDirectories" ];
+      before = [ ];
+      data = ''
+        # these commands end up creating duplicates once I log out and then log back in, I just need to figure out how to
+        # not need to log out and then back in
+        
         #rm -rf ${config.xdg.dataHome}/"applications/home-manager"
         #mkdir -p ${config.xdg.dataHome}/"applications/home-manager"
         #cp -Lr ${config.home.homeDirectory}/.nix-profile/share/applications/* ${config.xdg.dataHome}/"applications/home-manager/"
-      #'';
-    #};
-  #};
+      '';
+    };
+  };
 
   # This value determines the Home Manager release that your configuration is
   # compatible with. This helps avoid breakage when a new Home Manager release
@@ -215,14 +218,10 @@
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
     #nushell.enable = true; # I want to learn this but not this moment
-    ssh = {
-      enable = true;
-    };
+    ssh = { enable = true; };
     tealdeer = {
       enable = true;
-      settings = {
-        auto_update = true;
-      };
+      settings = { auto_update = true; };
     };
     starship.enable = true;
     zsh = {
@@ -235,13 +234,9 @@
         plugins = [ "git" "kubectl" "starship" "vi-mode" ];
         theme = "agnoster";
       };
-      syntaxHighlighting = {
-        enable = true;
-      };
+      syntaxHighlighting = { enable = true; };
     };
   };
 
-  services = {
-    gpg-agent.enable = true;  
-  };
+  services = { gpg-agent.enable = true; };
 }
