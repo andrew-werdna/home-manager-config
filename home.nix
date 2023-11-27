@@ -9,9 +9,37 @@
   nixpkgs.config.allowUnfree = true;
 
   # something to [consider](https://rycee.gitlab.io/home-manager/options.html#opt-qt.enable)
-  qt.enable = true;
-  qt.platformTheme = "gtk";
-  qt.style.name = "adwaita";
+  #qt.enable = true;
+  #qt.platformTheme = "gtk";
+  #qt.style.name = "adwaita";
+
+  # I found a [gist](https://gist.github.com/nat-418/903c8e8ef605c36c2e3ed9a8e9ed0cea) in which someone was able
+  # to get zeal working by using some GTK stuff instead of QT. If this works, then it will eliminate the need for
+  # the above stuff messing with QT.
+  gtk = {
+    enable = true;
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.gnome.adwaita-icon-theme;
+    };
+
+    theme = {
+      name = "Adwaita";
+      package = pkgs.gnome.gnome-themes-extra;
+    };
+
+    gtk3.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+
+    gtk4.extraConfig = {
+      Settings = ''
+        gtk-application-prefer-dark-theme=1
+      '';
+    };
+  };
 
   targets.genericLinux.enable = true;
 
@@ -51,76 +79,80 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-  home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    pkgs._1password-gui
-    pkgs.albert
-    pkgs.alloy6
-    pkgs.autoconf
-    pkgs.automake
-    pkgs.bat
-    pkgs.bazel
-    pkgs.beekeeper-studio
-    #pkgs.binutils # ld has a name collision with ld from gcc
-    pkgs.bison
-    pkgs.brave
-    #pkgs.chez # don't really need this right now
-    #pkgs.clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
-    pkgs.cmake
-    pkgs.copyq
-    pkgs.coreutils-full
-    pkgs.cppcheck
-    pkgs.discord
-    pkgs.docker
-    pkgs.docker-compose
-    pkgs.fd
-    pkgs.flawfinder
-    pkgs.gcc_latest
-    pkgs.gdb
-    pkgs.gnupg
-    pkgs.graphviz
-    pkgs.gzip
-    pkgs.helix
-    pkgs.htop
-    pkgs.jq
-    pkgs.keychain
-    pkgs.kind
-    pkgs.kubectl
-    pkgs.lldb_16
-    pkgs.llvm_16
-    pkgs.minikube
-    pkgs.navi
-    pkgs.neofetch
-    pkgs.nerdfonts
-    pkgs.netcat
-    pkgs.nil
-    pkgs.nixfmt
-    pkgs.obsidian
-    pkgs.openssh
-    pkgs.pass
-    pkgs.pkg-config
-    pkgs.pprof
-    #pkgs.racket # don't really need this right now
-    pkgs.ranger
-    pkgs.ripgrep
-    pkgs.strace
-    pkgs.texlab
-    pkgs.tlaplusToolbox
-    pkgs.tree
-    pkgs.tree-sitter
-    pkgs.tmux
-    pkgs.valgrind
-    pkgs.vscode
-    pkgs.watch
-    pkgs.wireshark
-    pkgs.xplr
-    pkgs.zeal # for some reason this is having a problem related to QT or GTK, so it won't run currently
-    pkgs.zellij
-    pkgs.zig
-    pkgs.zls
+  home.packages = with pkgs; [
+    _1password-gui
+    albert
+    alloy6
+    autoconf
+    automake
+    bat
+    bazel
+    beekeeper-studio
+    #binutils # ld has a name collision with ld from gcc
+    bison
+    brave
+    #chez # don't really need this right now
+    #clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
+    cmake
+    copyq
+    coreutils-full
+    cppcheck
+    discord
+    docker
+    docker-compose
+    fd
+    flawfinder
+    gcc_latest
+    gdb
+    #gnupg # not sure I need this if I use `gpg.enable = true;`
+    graphviz
+    gzip
+    helix
+    htop
+    hunspell
+    hunspellDicts.en-us
+    jq
+    keychain
+    kind
+    kubectl
+    lldb_16
+    llvm_16
+    meld
+    minikube
+    navi
+    neofetch
+    nerdfonts
+    netcat
+    nil
+    nixfmt
+    obsidian
+    #openssh # not sure I need this if I have `programs.ssh.enable = true;`
+    pass
+    pika-backup
+    pkg-config
+    pprof
+    qalculate-gtk
+    #racket # don't really need this right now
+    ranger
+    remmina
+    ripgrep
+    strace
+    texlab
+    tlaplusToolbox
+    tree
+    tree-sitter
+    tmux
+    valgrind
+    virt-manager
+    vscode
+    watch
+    wireshark
+    xclip
+    xplr
+    zeal # for some reason this is having a problem related to QT or GTK, so it won't run currently
+    zellij
+    zig
+    zls
 
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -166,32 +198,50 @@
     SHELL = "/home/sirius/.nix-profile/bin/zsh";
   };
 
-  programs.direnv = {
-    enable = true;
-    nix-direnv.enable = true;
-  };
-  programs.eza.enable = true;
-  programs.git = {
-    enable = true;
-    userName = "andrew-werdna";
-    userEmail = "8261769+andrew-werdna@users.noreply.github.com";
-  };
-  # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
-  #programs.nushell.enable = true; # I want to learn this but not this moment
-  programs.starship.enable = true;
-  programs.zsh = {
-    enable = true;
-    enableAutosuggestions = true;
-    autocd = true;
-    defaultKeymap = "viins";
-    oh-my-zsh = {
+  programs = {
+    direnv = {
       enable = true;
-      plugins = [ "git" "kubectl" "starship" "vi-mode" ];
-      theme = "agnoster";
+      nix-direnv.enable = true;
     };
-    syntaxHighlighting = {
+    eza.enable = true;
+    fzf.enable = true;
+    git = {
+      enable = true;
+      userName = "andrew-werdna";
+      userEmail = "8261769+andrew-werdna@users.noreply.github.com";
+    };
+    gpg.enable = true;
+
+    # Let Home Manager install and manage itself.
+    home-manager.enable = true;
+    #nushell.enable = true; # I want to learn this but not this moment
+    ssh = {
       enable = true;
     };
+    tealdeer = {
+      enable = true;
+      settings = {
+        auto_update = true;
+      };
+    };
+    starship.enable = true;
+    zsh = {
+      enable = true;
+      enableAutosuggestions = true;
+      autocd = true;
+      defaultKeymap = "viins";
+      oh-my-zsh = {
+        enable = true;
+        plugins = [ "git" "kubectl" "starship" "vi-mode" ];
+        theme = "agnoster";
+      };
+      syntaxHighlighting = {
+        enable = true;
+      };
+    };
+  };
+
+  services = {
+    gpg-agent.enable = true;  
   };
 }
