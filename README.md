@@ -8,13 +8,10 @@ _per project_ tools and dependencies.
 
 ## Todos for Home Manager
 
-- set my default shell (between `nushell` and `zsh`)
-- have updated shell configuration managed and symlinked by HM (HM already manages configs, I just need to customize them)
-  - also automatically set up zsh and nushell with starship
+- learn nushell and then switch _from_ **zsh** _to_ **nushell**
 - finish customizing my `git config` and `git-related` files
-- now that I've solved the `*.desktop` files being findable by the GNOME application explorer, I just need to customize
-the application icons for the various applications I've installed
-- use overrides and overlays to customize the packages I've installed
+- figure out how to have new `*.desktop` files be discovered by GNOME, without having to logout and log back in after installing them
 - ideally find more flake-based resources for developer environments
-- switch to having as many dotfiles (not just my shell) as possible, fully managed, customized, and symlinked by HM
+- learn HM better and see what services I can set up via HM as well
 - 
+
