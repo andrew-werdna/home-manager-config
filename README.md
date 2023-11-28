@@ -6,6 +6,11 @@ _ubiquitous_ tools and applications I use as well as my dotfiles.
 My intent is to use something like [the nix way dev templates](https://github.com/the-nix-way/dev-templates) for
 _per project_ tools and dependencies.
 
+## HM (home-manager) Documentation
+
+- home-manager [wiki](https://nixos.wiki/wiki/Home_Manager)
+- home-manager [configuration options](https://rycee.gitlab.io/home-manager/options.html)
+
 ## Todos for Home Manager
 
 - learn nushell and then switch _from_ **zsh** _to_ **nushell**

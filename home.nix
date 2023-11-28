@@ -97,7 +97,6 @@
     #chez # don't really need this right now
     #clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
     cmake
-    copyq
     coreutils-full
     cppcheck
     discord
@@ -107,7 +106,6 @@
     flawfinder
     gcc_latest
     gdb
-    #gnupg # not sure I need this if I use `gpg.enable = true;`
     graphviz
     gzip
     helix
@@ -129,7 +127,6 @@
     nil
     nixfmt
     obsidian
-    #openssh # not sure I need this if I have `programs.ssh.enable = true;`
     pass
     #pika-backup # I don't need this right now
     pkg-config
@@ -144,7 +141,6 @@
     tlaplusToolbox
     tree
     tree-sitter
-    #tmux # don't need this if I use `programs.tmux = ...`
     valgrind
     #virt-manager # don't need this right now
     vscode
@@ -262,5 +258,8 @@
     };
   };
 
-  services = { gpg-agent.enable = true; };
+  services = { 
+    copyq.enable = true;
+    gpg-agent.enable = true;
+  };
 }
