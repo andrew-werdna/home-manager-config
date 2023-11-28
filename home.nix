@@ -246,7 +246,7 @@
       keyMode = "vi";
       mouse = true;
       newSession = true;
-      shell = "\${pkgs.zsh}/bin/zsh";
+      shell = "${pkgs.zsh}/bin/zsh";
     };
     zsh = {
       enable = true;
