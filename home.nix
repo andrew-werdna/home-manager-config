@@ -63,7 +63,7 @@
       data = ''
         # these commands end up creating duplicates once I log out and then log back in, I just need to figure out how to
         # not need to log out and then back in
-        
+
         #rm -rf ${config.xdg.dataHome}/"applications/home-manager"
         #mkdir -p ${config.xdg.dataHome}/"applications/home-manager"
         #cp -Lr ${config.home.homeDirectory}/.nix-profile/share/applications/* ${config.xdg.dataHome}/"applications/home-manager/"
@@ -120,7 +120,7 @@
     kubectl
     lldb_16
     llvm_16
-    meld
+    #meld # going to use difftastic instead
     minikube
     navi
     neofetch
@@ -131,22 +131,22 @@
     obsidian
     #openssh # not sure I need this if I have `programs.ssh.enable = true;`
     pass
-    pika-backup
+    #pika-backup # I don't need this right now
     pkg-config
     pprof
     qalculate-gtk
     #racket # don't really need this right now
     ranger
-    remmina
+    #remmina # don't need this right now
     ripgrep
     strace
     texlab
     tlaplusToolbox
     tree
     tree-sitter
-    tmux
+    #tmux # don't need this if I use `programs.tmux = ...`
     valgrind
-    virt-manager
+    #virt-manager # don't need this right now
     vscode
     watch
     wireshark
@@ -209,7 +209,20 @@
     eza.enable = true;
     fzf.enable = true;
     git = {
+      difftastic = { enable = true; };
       enable = true;
+      extraConfig = {
+        diff = { tool = "difftastic"; };
+        difftool = {
+          "difftastic" = {
+            cmd = ''
+              difft "$LOCAL" "$REMOTE"
+            '';
+          };
+          prompt = false;
+        };
+        pager = { difftool = true; };
+      };
       userName = "andrew-werdna";
       userEmail = "8261769+andrew-werdna@users.noreply.github.com";
     };
@@ -219,11 +232,22 @@
     home-manager.enable = true;
     #nushell.enable = true; # I want to learn this but not this moment
     ssh = { enable = true; };
+    starship.enable = true;
     tealdeer = {
       enable = true;
       settings = { auto_update = true; };
     };
-    starship.enable = true;
+    tmux = {
+      enable = true;
+      baseIndex = 1;
+      clock24 = true;
+      customPaneNavigationAndResize = true;
+      disableConfirmationPrompt = true;
+      keyMode = "vi";
+      mouse = true;
+      newSession = true;
+      shell = "\${pkgs.zsh}/bin/zsh";
+    };
     zsh = {
       enable = true;
       enableAutosuggestions = true;
