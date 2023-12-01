@@ -220,7 +220,7 @@
         };
         pager = { difftool = true; };
       };
-      hooks = { pre-commit = ./pre-commit; };
+      hooks = { pre-commit = ./pre-commit; }; # I need to investigate a per-repository git hooks setup
       userName = "andrew-werdna";
       userEmail = "8261769+andrew-werdna@users.noreply.github.com";
     };
