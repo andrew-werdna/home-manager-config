@@ -200,6 +200,7 @@
   programs = {
     direnv = {
       enable = true;
+      enableZshIntegration = true;
       nix-direnv.enable = true;
     };
     eza.enable = true;
@@ -219,9 +220,7 @@
         };
         pager = { difftool = true; };
       };
-      hooks = {
-        pre-commit = ./pre-commit;
-      };
+      hooks = { pre-commit = ./pre-commit; };
       userName = "andrew-werdna";
       userEmail = "8261769+andrew-werdna@users.noreply.github.com";
     };
