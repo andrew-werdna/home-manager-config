@@ -8,11 +8,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # something to [consider](https://rycee.gitlab.io/home-manager/options.html#opt-qt.enable)
-  #qt.enable = true;
-  #qt.platformTheme = "gtk";
-  #qt.style.name = "adwaita";
-
   # I found a [gist](https://gist.github.com/nat-418/903c8e8ef605c36c2e3ed9a8e9ed0cea) in which someone was able
   # to get zeal working by using some GTK stuff instead of QT. If this works, then it will eliminate the need for
   # the above stuff messing with QT.
@@ -40,6 +35,11 @@
       '';
     };
   };
+
+  # something to [consider](https://rycee.gitlab.io/home-manager/options.html#opt-qt.enable)
+  #qt.enable = true;
+  #qt.platformTheme = "gtk";
+  #qt.style.name = "adwaita";
 
   targets.genericLinux.enable = true;
 
@@ -204,8 +204,14 @@
       nix-direnv.enable = true;
     };
     eza.enable = true;
-    fzf.enable = true;
+    fzf = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     git = {
+      aliases = {
+        sha = "rev-parse --short=8 HEAD";
+      };
       difftastic = { enable = true; };
       enable = true;
       extraConfig = {
@@ -222,8 +228,8 @@
       };
       # I need to investigate a per-repository git hooks setup
       hooks = { pre-commit = ./pre-commit; };
-      userName = "andrew-werdna";
       userEmail = "8261769+andrew-werdna@users.noreply.github.com";
+      userName = "andrew-werdna";
     };
     gpg.enable = true;
 
@@ -237,27 +243,48 @@
       settings = { auto_update = true; };
     };
     tmux = {
-      enable = true;
       baseIndex = 1;
       clock24 = true;
       customPaneNavigationAndResize = true;
       disableConfirmationPrompt = true;
+      enable = true;
       keyMode = "vi";
       mouse = true;
       newSession = true;
       shell = "${pkgs.zsh}/bin/zsh";
     };
     zsh = {
-      enable = true;
-      enableAutosuggestions = true;
       autocd = true;
       defaultKeymap = "viins";
+      enable = true;
+      enableAutosuggestions = true;
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "kubectl" "starship" "vi-mode" ];
         theme = "agnoster";
       };
-      syntaxHighlighting = { enable = true; };
+      shellGlobalAliases = {
+        # Code Maat
+        #maat = "java -jar ~/bin/code-maat-1.0.4-standalone.jar -c git2";
+        #maat_logfile = "git log --all --numstat --date=short --pretty=format:'--%h--%ad--%aN' --no-renames";
+
+        # Docker
+        di_digests = "docker image ls | tail -n\$(docker image ls | wc -l | awk '{print \$1 - 1}') | grep -v none | tr -s ' ' | cut -d' ' -f3 | xargs -I {} docker inspect -f '{{printf \"\nImage=%s\nDigest=%s\" .RepoTags .RepoDigests}}' {}";
+        di_rm_nones = "docker image ls | grep none | tr -s ' ' | cut -d' ' -f3 | xargs docker rmi";
+
+        # Go
+        gotestcoverage = "go test -coverprofile cover.out ./... && go tool cover -html=cover.out && rm cover.out";
+
+        # Misc
+        _update = "sudo apt update -y && sudo apt upgrade -y --allow-downgrades && sudo apt autoclean -y && sudo apt autoremove -y";
+        gitp = "git -P";
+        hmedit = "hx ~/.config/home-manager/";
+        reshell = "exec $SHELL";
+
+        # Network
+        network_restart = "sudo systemctl restart systemd-networkd";
+     };
+     syntaxHighlighting = { enable = true; };
     };
   };
 
