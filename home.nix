@@ -263,7 +263,7 @@
         plugins = [ "git" "kubectl" "starship" "vi-mode" ];
         theme = "agnoster";
       };
-      shellAliases = {
+      shellGlobalAliases = {
         # Code Maat
         #maat = "java -jar ~/bin/code-maat-1.0.4-standalone.jar -c git2";
         #maat_logfile = "git log --all --numstat --date=short --pretty=format:'--%h--%ad--%aN' --no-renames";
