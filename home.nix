@@ -116,6 +116,7 @@
     kubectl
     lldb_16
     llvm_16
+    marksman
     #meld # going to use difftastic instead
     minikube
     navi
