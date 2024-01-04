@@ -88,7 +88,6 @@
     alloy6
     autoconf
     automake
-    bat
     bazel
     beekeeper-studio
     #binutils # ld has a name collision with ld from gcc
@@ -109,10 +108,9 @@
     graphviz
     gzip
     helix
-    htop
     hunspell
     hunspellDicts.en-us
-    jq
+    just
     keychain
     kind
     kubectl
@@ -198,6 +196,7 @@
   };
 
   programs = {
+    bat.enable = true;
     direnv = {
       enable = true;
       enableZshIntegration = true;
@@ -235,6 +234,8 @@
 
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
+    htop.enable = true;
+    jq.enable = true;
     #nushell.enable = true; # I want to learn this but not this moment
     ssh = { enable = true; };
     starship.enable = true;
