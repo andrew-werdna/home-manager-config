@@ -215,6 +215,9 @@
       difftastic = { enable = true; };
       enable = true;
       extraConfig = {
+        core = {
+          credential.helper = "store";
+        };
         diff = { tool = "difftastic"; };
         difftool = {
           "difftastic" = {
@@ -227,7 +230,7 @@
         pager = { difftool = true; };
       };
       # I need to investigate a per-repository git hooks setup
-      hooks = { pre-commit = ./pre-commit; };
+      #hooks = { pre-commit = ./pre-commit; };
       userEmail = "8261769+andrew-werdna@users.noreply.github.com";
       userName = "andrew-werdna";
     };
