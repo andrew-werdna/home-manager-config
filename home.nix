@@ -3,8 +3,8 @@
 {
   # Home Manager needs a bit of information about you and the paths it should
   # manage.
-  home.username = "sirius";
-  home.homeDirectory = "/home/sirius";
+  home.username = "abduke";
+  home.homeDirectory = "/home/abduke";
 
   nixpkgs.config.allowUnfree = true;
 
@@ -88,34 +88,35 @@
     alloy6
     autoconf
     automake
-    bat
     bazel
     beekeeper-studio
     #binutils # ld has a name collision with ld from gcc
     bison
     brave
+    cacert
     #chez # don't really need this right now
     #clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
     cmake
-    coreutils-full
+    #coreutils-full # on workspaces this conflicts with builtins
     cppcheck
     discord
-    docker
+    #docker # I can't seem to get this to work with systemd
     docker-compose
+    docker-credential-helpers
     fd
     flawfinder
     gcc_latest
     gdb
+    #git-credential-manager # this doesn't seem to work
     graphviz
     gzip
     helix
-    htop
     hunspell
     hunspellDicts.en-us
-    jq
-    keychain
+    #keychain # keychain from nixpkgs must need some extra config bc it can't identify my user
     kind
     kubectl
+    lsb-release
     lldb_16
     llvm_16
     #meld # going to use difftastic instead
@@ -189,15 +190,16 @@
   #
   # or
   #
-  #  /etc/profiles/per-user/sirius/etc/profile.d/hm-session-vars.sh
+  #  /etc/profiles/per-user/abduke/etc/profile.d/hm-session-vars.sh
   #
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
     EDITOR = "hx";
-    SHELL = "/home/sirius/.nix-profile/bin/zsh";
+    SHELL = "/home/abduke/.nix-profile/bin/zsh";
   };
 
   programs = {
+    bat.enable = true;
     direnv = {
       enable = true;
       enableZshIntegration = true;
@@ -215,6 +217,9 @@
       difftastic = { enable = true; };
       enable = true;
       extraConfig = {
+        credential = {
+          helper = "!pass git/abrown7100@github";
+        };
         diff = { tool = "difftastic"; };
         difftool = {
           "difftastic" = {
@@ -227,14 +232,16 @@
         pager = { difftool = true; };
       };
       # I need to investigate a per-repository git hooks setup
-      hooks = { pre-commit = ./pre-commit; };
-      userEmail = "8261769+andrew-werdna@users.noreply.github.com";
-      userName = "andrew-werdna";
+      #hooks = { pre-commit = ./pre-commit; };
+      userEmail = "129974093+abrown7100@users.noreply.github.com";
+      userName = "abrown7100";
     };
     gpg.enable = true;
 
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
+    htop.enable = true;
+    jq.enable = true;
     #nushell.enable = true; # I want to learn this but not this moment
     ssh = { enable = true; };
     starship.enable = true;
@@ -258,6 +265,12 @@
       defaultKeymap = "viins";
       enable = true;
       enableAutosuggestions = true;
+      initExtra = ''
+        export XDG_CONFIG_DIRS="$XDG_CONFIG_DIRS:${config.home.homeDirectory}.nix-profile/etc/systemd/system";
+        export XDG_DATA_DIRS="$XDG_DATA_DIRS:${config.home.homeDirectory}.nix-profile/etc/systemd/system";
+        export USER="abduke";
+        keychain github_duke
+      '';
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "kubectl" "starship" "vi-mode" ];
