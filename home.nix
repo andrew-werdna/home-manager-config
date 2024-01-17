@@ -107,7 +107,7 @@
     flawfinder
     gcc_latest
     gdb
-    #git-credential-manager # this doesn't seem to work
+    git-credential-manager
     graphviz
     gzip
     helix
@@ -218,7 +218,8 @@
       enable = true;
       extraConfig = {
         credential = {
-          helper = "!pass git/abrown7100@github";
+          credentialStore = "gpg";
+          helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
         };
         diff = { tool = "difftastic"; };
         difftool = {
@@ -269,6 +270,7 @@
         export XDG_CONFIG_DIRS="$XDG_CONFIG_DIRS:${config.home.homeDirectory}.nix-profile/etc/systemd/system";
         export XDG_DATA_DIRS="$XDG_DATA_DIRS:${config.home.homeDirectory}.nix-profile/etc/systemd/system";
         export USER="abduke";
+        #${pkgs.keychain}/bin/keychain github_duke # if I'm able to switch back to using nixpkgs keychain
         keychain github_duke
       '';
       oh-my-zsh = {
