@@ -93,18 +93,20 @@
     #binutils # ld has a name collision with ld from gcc
     bison
     brave
+    cacert
     #chez # don't really need this right now
     #clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
     cmake
-    coreutils-full
+    #coreutils-full # I don't think I actually need this
     cppcheck
     discord
-    docker
+    #docker # I can't seem to get this to work with systemd
     docker-compose
     fd
     flawfinder
     gcc_latest
     gdb
+    git-credential-manager
     graphviz
     gzip
     helix
@@ -116,6 +118,7 @@
     kubectl
     lldb_16
     llvm_16
+    lsb-release
     marksman
     #meld # going to use difftastic instead
     minikube
@@ -215,8 +218,9 @@
       difftastic = { enable = true; };
       enable = true;
       extraConfig = {
-        core = {
-          credential.helper = "store";
+        credential = {
+          credentialStore = "gpg";
+          helper = "git-credential-manager";
         };
         diff = { tool = "difftastic"; };
         difftool = {
@@ -263,6 +267,9 @@
       defaultKeymap = "viins";
       enable = true;
       enableAutosuggestions = true;
+      initExtra = ''
+        keychain id_ed25519
+      '';
       oh-my-zsh = {
         enable = true;
         plugins = [ "git" "kubectl" "starship" "vi-mode" ];
