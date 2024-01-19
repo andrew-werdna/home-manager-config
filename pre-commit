@@ -1,4 +1,0 @@
-#!/usr/bin/env bash
-
-find $(git rev-parse --show-toplevel) -type f -name "*.nix" -exec nixfmt {} \;
-
