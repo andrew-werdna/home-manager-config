@@ -6,7 +6,16 @@
   home.username = "abduke";
   home.homeDirectory = "/home/abduke";
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs = {
+    config.allowUnfree = true;  
+    overlays = [
+      (final: prev: {
+        obsidian = prev.obsidian.override {
+          electron = final.electron_28;
+        };
+      })
+    ];
+  };
 
   # I found a [gist](https://gist.github.com/nat-418/903c8e8ef605c36c2e3ed9a8e9ed0cea) in which someone was able
   # to get zeal working by using some GTK stuff instead of QT. If this works, then it will eliminate the need for
