@@ -231,6 +231,7 @@
           };
           prompt = false;
         };
+        init.defaultBranch = "main";
         pager = { difftool = true; };
       };
       # I need to investigate a per-repository git hooks setup
@@ -269,6 +270,18 @@
       enableAutosuggestions = true;
       initExtra = ''
         keychain id_ed25519
+        # GOENV
+        if [[ -d "$HOME/.goenv/" ]]; then
+          export GOENV_ROOT="$HOME/.goenv"
+          export PATH="$GOENV_ROOT/bin:$PATH"
+          eval "$(goenv init -)"
+          export PATH="$GOROOT/bin:$PATH"
+          export PATH="$PATH:$GOPATH/bin"
+        fi
+        # Rustup
+        if [[ -f "$HOME/.cargo/env" ]]; then
+          source "$HOME/.cargo/env"
+        fi
       '';
       oh-my-zsh = {
         enable = true;
