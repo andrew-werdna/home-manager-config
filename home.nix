@@ -114,7 +114,7 @@
     flawfinder
     gcc_latest
     gdb
-    git-credential-manager
+    #git-credential-manager # for some reason this no longer seems to work
     graphviz
     gzip
     helix
@@ -137,6 +137,9 @@
     obsidian
     pass
     #pika-backup # I don't need this right now
+    #pinentry # collides with other versions
+    #pinentry-curses # collides with other versions
+    pinentry-gtk2 # needed to work with latest gnupg
     pkg-config
     pprof
     qalculate-gtk
@@ -225,8 +228,10 @@
       enable = true;
       extraConfig = {
         credential = {
-          credentialStore = "gpg";
-          helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
+          #credentialStore = "gpg";
+          #helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
+          #helper = "!pass git/abrown7100@github";
+          helper = "store";
         };
         diff = { tool = "difftastic"; };
         difftool = {
@@ -244,7 +249,9 @@
       userEmail = "129974093+abrown7100@users.noreply.github.com";
       userName = "abrown7100";
     };
-    gpg.enable = true;
+    gpg = {
+      enable = true;
+    };
 
     # Let Home Manager install and manage itself.
     home-manager.enable = true;
@@ -327,6 +334,13 @@
 
   services = {
     copyq.enable = true;
-    gpg-agent.enable = true;
+    gpg-agent = {
+      enable = true;    
+      enableScDaemon = false;
+      #enableSshSupport = true;
+      #extraConfig = ''
+      #'';
+      pinentryFlavor = "gtk2";
+    };
   };
 }
