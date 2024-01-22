@@ -7,14 +7,12 @@
   home.homeDirectory = "/home/abduke";
 
   nixpkgs = {
-    config.allowUnfree = true;  
-    overlays = [
-      (final: prev: {
-        obsidian = prev.obsidian.override {
-          electron = final.electron_28;
-        };
-      })
-    ];
+    config = {
+      allowUnfree = true;  
+      permittedInsecurePackages = [
+        "electron-25.9.0"
+      ];
+    };
   };
 
   # I found a [gist](https://gist.github.com/nat-418/903c8e8ef605c36c2e3ed9a8e9ed0cea) in which someone was able
@@ -279,14 +277,22 @@
         export XDG_CONFIG_DIRS="$XDG_CONFIG_DIRS:${config.home.homeDirectory}.nix-profile/etc/systemd/system";
         export XDG_DATA_DIRS="$XDG_DATA_DIRS:${config.home.homeDirectory}.nix-profile/etc/systemd/system";
         export USER="abduke";
+
         #${pkgs.keychain}/bin/keychain github_duke # if I'm able to switch back to using nixpkgs keychain
         keychain github_duke
+
+        # Goenv setup
         if [[ -d "$HOME/.goenv/" ]]; then
           export GOENV_ROOT="$HOME/.goenv"
           export PATH="$GOENV_ROOT/bin:$PATH"
           eval "$(goenv init -)"
           export PATH="$GOROOT/bin:$PATH"
           export PATH="$PATH:$GOPATH/bin"
+        fi
+
+        # Rust setup
+        if [[ -f "$HOME/.cargo/env" ]]; then
+          source "$HOME/.cargo/env"
         fi
       '';
       oh-my-zsh = {
