@@ -228,6 +228,8 @@
       enable = true;
       extraConfig = {
         credential = {
+          # an outstanding [discourse post](https://discourse.nixos.org/t/cant-get-gnupg-to-work-no-pinentry/15373/8)
+          # about the "no pinentry" error I keep encountering with gpg/gpg-agent
           #credentialStore = "gpg";
           #helper = "${pkgs.git-credential-manager}/bin/git-credential-manager";
           #helper = "!pass git/abrown7100@github";
