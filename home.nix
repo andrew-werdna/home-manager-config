@@ -287,6 +287,11 @@
         if [[ -f "$HOME/.cargo/env" ]]; then
           source "$HOME/.cargo/env"
         fi
+        # NVM
+        if [[ -d "$HOME/.config/nvm/" ]]; then
+          export NVM_DIR="$HOME/.config/nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        fi
       '';
       oh-my-zsh = {
         enable = true;
