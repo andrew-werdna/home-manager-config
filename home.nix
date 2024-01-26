@@ -14,8 +14,7 @@
   };
 
   # I found a [gist](https://gist.github.com/nat-418/903c8e8ef605c36c2e3ed9a8e9ed0cea) in which someone was able
-  # to get zeal working by using some GTK stuff instead of QT. If this works, then it will eliminate the need for
-  # the above stuff messing with QT.
+  # to get zeal working by using some GTK stuff instead of QT. I have not been able to get zeal to work from here.
   gtk = {
     enable = true;
     iconTheme = {
@@ -155,7 +154,7 @@
     wireshark
     xclip
     xplr
-    zeal # for some reason this is having a problem related to QT or GTK, so it won't run currently
+    #zeal # for some reason this is having a problem related to QT or GTK, so it won't run currently
     zellij
     zig
     zls
