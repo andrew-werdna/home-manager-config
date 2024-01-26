@@ -149,6 +149,7 @@
     tree-sitter
     valgrind
     #virt-manager # don't need this right now
+    virtualboxWithExtpack
     vscode
     watch
     wireshark
@@ -309,6 +310,7 @@
         gitp = "git -P";
         hmedit = "hx ~/.config/home-manager/";
         reshell = "exec $SHELL";
+        updaterepos = "find \"$HOME\" -maxdepth 3 -type d -name \".git\" -exec dirname {} \; 2>/dev/null | xargs -I {} git -P -C {} pull -tp";
 
         # Network
         network_restart = "sudo systemctl restart systemd-networkd";
