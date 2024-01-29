@@ -154,6 +154,7 @@
     tree-sitter
     valgrind
     #virt-manager # don't need this right now
+    virtualboxWithExtpack
     vscode
     watch
     wireshark
