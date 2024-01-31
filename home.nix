@@ -128,6 +128,7 @@
     llvm_16
     #meld # going to use difftastic instead
     minikube
+    mlocate # need the system version of this
     navi
     neofetch
     nerdfonts
@@ -160,7 +161,7 @@
     wireshark
     xclip
     xplr
-    zeal # for some reason this is having a problem related to QT or GTK, so it won't run currently
+    #zeal # for some reason this is having a problem related to QT or GTK, so it won't run currently
     zellij
     zig
     zls
