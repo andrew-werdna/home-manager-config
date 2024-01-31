@@ -93,8 +93,8 @@
     _1password-gui
     albert
     alloy6
-    autoconf
-    automake
+    #autoconf # I think I need the system version of this
+    #automake # I think I need the system version of this
     bazel
     beekeeper-studio
     #binutils # ld has a name collision with ld from gcc
@@ -103,7 +103,7 @@
     cacert
     #chez # don't really need this right now
     #clang_16 # need an override or something so this doesn't collide with the gcc wrapper "cc"
-    cmake
+    #cmake # I think I need the system version of this
     #coreutils-full # on workspaces this conflicts with builtins
     cppcheck
     discord
@@ -112,8 +112,8 @@
     docker-credential-helpers
     fd
     flawfinder
-    gcc_latest
-    gdb
+    #gcc_latest # I think I need the system version of this
+    #gdb # I think I need the system version of this
     #git-credential-manager # for some reason this no longer seems to work
     graphviz
     gzip
@@ -124,11 +124,11 @@
     kind
     kubectl
     lsb-release
-    lldb_16
-    llvm_16
+    #lldb_16 # I think I need the system version of this
+    #llvm_16 # I think I need the system version of this
     #meld # going to use difftastic instead
     minikube
-    mlocate # need the system version of this
+    mlocate
     navi
     neofetch
     nerdfonts
@@ -141,7 +141,7 @@
     #pinentry # collides with other versions
     #pinentry-curses # collides with other versions
     pinentry-gtk2 # needed to work with latest gnupg
-    pkg-config
+    #pkg-config # I think I need the system version of this so permissions don't get messed up when using rust compiler
     pprof
     qalculate-gtk
     #racket # don't really need this right now
@@ -305,6 +305,9 @@
         if [[ -f "$HOME/.cargo/env" ]]; then
           source "$HOME/.cargo/env"
         fi
+
+        # dedupe path
+        typeset -U PATH
       '';
       oh-my-zsh = {
         enable = true;
