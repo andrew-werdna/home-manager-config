@@ -87,6 +87,9 @@
   # release notes.
   home.stateVersion = "23.05"; # Please read the comment before changing.
 
+  # in order to get rust working with system packages, I had to not use nix for C related packages
+  # and instead do the following:
+  #     sudo apt install -y automake cmake libclang-dev libssl-dev
   # The home.packages option allows you to install Nix packages into your
   # environment.
   home.packages = with pkgs; [
@@ -155,7 +158,7 @@
     tree-sitter
     valgrind
     #virt-manager # don't need this right now
-    virtualboxWithExtpack
+    #virtualboxWithExtpack # can't seem to set up the kernel module with this, switching to system version
     vscode
     watch
     wireshark
@@ -212,6 +215,10 @@
 
   programs = {
     bat.enable = true;
+    broot = {
+      enable = true;
+      enableZshIntegration = true;
+    };
     direnv = {
       enable = true;
       enableZshIntegration = true;
@@ -320,7 +327,13 @@
         #maat_logfile = "git log --all --numstat --date=short --pretty=format:'--%h--%ad--%aN' --no-renames";
 
         # Docker
-        di_digests = "docker image ls | tail -n\$(docker image ls | wc -l | awk '{print \$1 - 1}') | grep -v none | tr -s ' ' | cut -d' ' -f3 | xargs -I {} docker inspect -f '{{printf \"\nImage=%s\nDigest=%s\" .RepoTags .RepoDigests}}' {}";
+        di_digests = ''docker image ls | \
+        tail -n$(docker image ls | wc -l | awk '{print $1 - 1}') | \
+        grep -v none | \
+        tr -s ' ' | \
+        cut -d' ' -f3 | \
+        xargs -I {} docker inspect -f '{{printf "\nImage=%s\nDigest=%s" .RepoTags .RepoDigests}}' {}
+        '';
         di_rm_nones = "docker image ls | grep none | tr -s ' ' | cut -d' ' -f3 | xargs docker rmi";
 
         # Go
