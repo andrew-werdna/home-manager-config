@@ -149,7 +149,7 @@
     tree-sitter
     valgrind
     #virt-manager # don't need this right now
-    virtualboxWithExtpack
+    #virtualboxWithExtpack # just using the system version for easier use
     vscode
     watch
     wireshark
