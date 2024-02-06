@@ -313,6 +313,13 @@
           source "$HOME/.cargo/env"
         fi
 
+        # NVM
+        if [[ -f "$HOME/.config/nvm/nvm.sh" ]]; then
+          export NVM_DIR="$HOME/.config/nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+        fi
+
         # dedupe path
         typeset -U PATH
       '';
