@@ -99,7 +99,7 @@
     #autoconf # I think I need the system version of this
     #automake # I think I need the system version of this
     bazel
-    beekeeper-studio
+    #beekeeper-studio # this doesn't seem to work in a somewhat similar manner to zeal
     #binutils # ld has a name collision with ld from gcc
     bison
     brave
