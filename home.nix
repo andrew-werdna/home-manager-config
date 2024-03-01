@@ -145,6 +145,7 @@
     #pinentry-curses # collides with other versions
     pinentry-gtk2 # needed to work with latest gnupg
     #pkg-config # I think I need the system version of this so permissions don't get messed up when using rust compiler
+    plantuml
     pprof
     qalculate-gtk
     #racket # don't really need this right now
