@@ -301,7 +301,7 @@
         keychain github_duke
 
         # Goenv setup
-        if [[ ! -d "$HOME/.goenv/" ]]; then
+        if [[ ! -d "$HOME/.goenv/bin" ]]; then
           git clone -v https://github.com/go-nv/goenv.git ~/.goenv
         else
           export GOENV_ROOT="$HOME/.goenv"
@@ -329,12 +329,17 @@
         fi
 
         # Pyenv setup
-        if [[ ! -d "$HOME/.pyenv/" ]]; then
+        if [[ ! -d "$HOME/.pyenv/bin" ]]; then
           git clone -v https://github.com/pyenv/pyenv.git ~/.pyenv
         else
          export PYENV_ROOT="$HOME/.pyenv"
          [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
          eval "$(pyenv init -)"        
+        fi
+
+        # nsc setup for nats
+        if [[ -d "$HOME/.nsccli/bin" ]]; then
+          export PATH="$PATH:/home/abduke/.nsccli/bin"
         fi
 
         # dedupe path
