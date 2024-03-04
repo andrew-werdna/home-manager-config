@@ -145,7 +145,7 @@
     #pinentry-curses # collides with other versions
     pinentry-gtk2 # needed to work with latest gnupg
     #pkg-config # I think I need the system version of this so permissions don't get messed up when using rust compiler
-    plantuml
+    #plantuml # his has similar issues to zeal, something about gtk-cranberra
     pprof
     qalculate-gtk
     #racket # don't really need this right now
@@ -165,7 +165,7 @@
     wireshark
     xclip
     xplr
-    #zeal # for some reason this is having a problem related to QT or GTK, so it won't run currently
+    #zeal # for some reason this is having a problem related to gtk-cranberra or something
     zellij
     zig
     zls
