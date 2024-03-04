@@ -301,40 +301,40 @@
         keychain github_duke
 
         # Goenv setup
-        if [[ -f "$HOME/.goenv/bin" ]]; then
+        if [[ ! -d "$HOME/.goenv/" ]]; then
+          git clone -v https://github.com/go-nv/goenv.git ~/.goenv
+        else
           export GOENV_ROOT="$HOME/.goenv"
           export PATH="$GOENV_ROOT/bin:$PATH"
           eval "$(goenv init -)"
           export PATH="$GOROOT/bin:$PATH"
           export PATH="$PATH:$GOPATH/bin"
-        else
-          git clone https://github.com/go-nv/goenv.git ~/.goenv
         fi
 
         # Rust setup
-        if [[ -f "$HOME/.cargo/env" ]]; then
-          source "$HOME/.cargo/env"
-        else
+        if [[ ! -f "$HOME/.cargo/env" ]]; then
           curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        else
+          source "$HOME/.cargo/env"
         fi
 
         # NVM
-        if [[ -f "$HOME/.config/nvm/nvm.sh" ]]; then
+        if [[ ! -f "$HOME/.config/nvm/nvm.sh" ]]; then
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+          #git clone https://github.com/nvm-sh/nvm.git ~/.nvm
+        else
           export NVM_DIR="$HOME/.config/nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
           [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-        else
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-          #git clone https://github.com/nvm-sh/nvm.git ~/.nvm
         fi
 
         # Pyenv setup
-        if [[ -f "$HOME/.pyenv/bin" ]]; then
+        if [[ ! -d "$HOME/.pyenv/" ]]; then
+          git clone -v https://github.com/pyenv/pyenv.git ~/.pyenv
+        else
          export PYENV_ROOT="$HOME/.pyenv"
          [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
          eval "$(pyenv init -)"        
-        else
-          git clone https://github.com/pyenv/pyenv.git ~/.pyenv
         fi
 
         # dedupe path
