@@ -370,10 +370,11 @@
 
         # Misc
         _update = "sudo apt update -y && sudo apt upgrade -y --allow-downgrades && sudo apt autoclean -y && sudo apt autoremove -y";
-        gitupdatehome = ''
+        updatehomerepos = ''
           find "$HOME" -maxdepth 3 -type d -name .git -exec dirname {} \; | xargs -I {} git -P -C {} pull -tp
         '';
         gitp = "git -P";
+        getLatestGitTag = "gitp tag | tail -n 1";
         hmedit = "hx ~/.config/home-manager/";
         reshell = "exec $SHELL";
 
