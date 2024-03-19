@@ -273,7 +273,7 @@
       autocd = true;
       defaultKeymap = "viins";
       enable = true;
-      enableAutosuggestions = true;
+      autosuggestion.enable = true;
       initExtra = ''
         keychain id_ed25519
         # GOENV
